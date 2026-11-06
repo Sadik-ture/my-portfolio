@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #000000;
+  --surface: #08080a;
+  --surface-2: #111113;
+  --border: #1d1d20;
+  --border-hover: #3a3a40;
+  --text-main: #ffffff;
+  --hero-name: #f4f2ee;
+  --text-muted: #8a8a8a;
+  --cyan: #00f0ff;
+  --violet: #9b6dff;
+  --green: #00ff88;
+  --nav-bg: rgba(0, 0, 0, 0.75);
+}
+
+[data-theme='light'] {
+  --bg: #f4f4f5;
+  --surface: #ffffff;
+  --surface-2: #ececee;
+  --border: #e0e0e4;
+  --border-hover: #a1a1aa;
+  --text-main: #09090b;
+  --hero-name: #09090b;
+  --text-muted: #52525b;
+  --cyan: #0284c7;
+  --violet: #7c3aed;
+  --green: #059669;
+  --nav-bg: rgba(244, 244, 245, 0.85);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 90px; background: var(--bg); }
+
+body { font-family: 'Inter Tight', sans-serif; background: var(--bg); }
+
+/* Typography */
+.font-serif { font-family: 'Instrument Serif', serif; }
+.font-mono  { font-family: 'JetBrains Mono', monospace; }
+.font-sans  { font-family: 'Inter Tight', sans-serif; }
+
+.display {
+  font-family: 'Instrument Serif', serif;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.italic-serif {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+::selection { background: var(--cyan); color: #000; }
+
+/* Cards */
+.tech-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.75rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.tech-box:hover { border-color: var(--border-hover); }
+
+/* Buttons */
+.btn-outline, .btn-solid {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.btn-outline {
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  background: transparent;
+}
+.btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+.btn-solid {
+  background: var(--text-main);
+  color: var(--bg);
+  font-weight: 700;
+  border: 1px solid var(--text-main);
+}
+.btn-solid:hover { background: var(--cyan); border-color: var(--cyan); color: #000; }
+.btn-disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* Utilities */
+.glowing-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  display: inline-block;
+}
+
+.noise::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(var(--text-main) 1px, transparent 1px),
+    linear-gradient(90deg, var(--text-main) 1px, transparent 1px);
+  background-size: 70px 70px;
+  mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
+}
+
+/* Marquee */
+.marquee-track {
+  display: flex; gap: 3rem; padding-right: 3rem;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); }
+::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
