@@ -1,4 +1,4 @@
-import BottomDock from './components/BottomDock';
+// import BottomDock from './components/BottomDock';
 import { useState, useEffect, useRef } from 'react';
 import { MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar';
